@@ -1,6 +1,7 @@
 // This is going to make random Messages appear on run
 const timeOfDayArray = ['morning', 'afternoon', 'evening']
 const randomTimeOfDay = timeOfDayArray[Math.floor(Math.random() * timeOfDayArray.length)]
+// my Object with messages
 const messages = {
     morningMessage:  ['Good Morning', 'Wonderful day today!', 'Fine morning to you'],
     afternoonMessage: ['Good afternoon', 'midday to you', 'How was your morning?'],
