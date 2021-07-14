@@ -3,25 +3,36 @@ const timeOfDayArray = ['morning', 'afternoon', 'evening']
 const randomTimeOfDay = timeOfDayArray[Math.floor(Math.random() * timeOfDayArray.length)]
 // my Object with messages
 const messages = {
-    morningMessage:  ['Good Morning', 'Wonderful day today!', 'Fine morning to you'],
-    afternoonMessage: ['Good afternoon', 'midday to you', 'How was your morning?'],
-    eveningMessage: ['Good Evening', 'Good Night', 'How was your day?'],
+    morningMessages:  ['Good Morning.', 'Wonderful day today!', 'Fine morning to you.'],
+    afternoonMessages: ['Good afternoon.', 'Midday to you.', 'How was your morning?'],
+    eveningMessages: ['Good Evening.', 'Good Night!', 'How was your day?'],
+    morningMessage(morningPhrase) {
+        this.morningMessages.push(morningPhrase)
+    },
+    afternoonMessage(afternoonPhrase) {
+        this.afternoonMessages.push(afternoonPhrase)
+    },
+    eveningMessage(eveningPhrase) {
+        this.eveningMessages.push(eveningPhrase)
+    }
 }
 
-const mixedMessage = (timeofday = randomTimeOfDay) => {
-    const randomIndex = Math.floor(Math.random() * messages.morningMessage.length)
-    if (typeof timeofday != 'string') {
+const mixedMessage = () => {
+    const randomIndexMorning = Math.floor(Math.random() * messages.morningMessages.length)
+    const randomIndexAfternoon = Math.floor(Math.random() * messages.afternoonMessages.length)
+    const randomIndexEvening = Math.floor(Math.random() * messages.eveningMessages.length)
+    if (typeof randomTimeOfDay != 'string') {
         return 'time of day must be either: morning, afternoon, evening.'
     }
-    if (timeofday === 'morning') {
-        console.log(messages.morningMessage[randomIndex])
-    } else if ( timeofday === 'afternoon') {
-        console.log(messages.afternoonMessage[randomIndex])
-    } else if ( timeofday === 'evening') {
-        console.log(messages.eveningMessage[randomIndex])
+    if (randomTimeOfDay === 'morning') {
+        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.morningMessages[randomIndexMorning])
+    } else if ( randomTimeOfDay === 'afternoon') {
+        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.afternoonMessages[randomIndexAfternoon])
+    } else if ( randomTimeOfDay === 'evening') {
+        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.eveningMessages[randomIndexEvening])
     } else {
         return 'Check your spelling, make sure you are using either: morning, afternoon or evening.'
     }
 }
-
+messages.eveningMessage('I am off to bed.')
 console.log(mixedMessage())
