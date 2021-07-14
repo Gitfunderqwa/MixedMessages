@@ -48,6 +48,5 @@ const mixedMessage = () => {
         return 'Check your spelling, make sure you are using either: morning, afternoon or evening.'
     }
 }
-console.log(time + '')
 reminders.eveningMessage('Time to wind down.')
-console.log(mixedMessage())
+mixedMessage()
