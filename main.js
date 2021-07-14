@@ -1,38 +1,53 @@
 // This is going to make random Messages appear on run
+const d = new Date
+const time = d.getHours()
 const timeOfDayArray = ['morning', 'afternoon', 'evening']
 const randomTimeOfDay = timeOfDayArray[Math.floor(Math.random() * timeOfDayArray.length)]
 // my Object with messages
-const messages = {
-    morningMessages:  ['Good Morning.', 'Wonderful day today!', 'Fine morning to you.'],
-    afternoonMessages: ['Good afternoon.', 'Midday to you.', 'How was your morning?'],
-    eveningMessages: ['Good Evening.', 'Good Night!', 'How was your day?'],
-    morningMessage(morningPhrase) {
-        this.morningMessages.push(morningPhrase)
+const reminders = {
+    morning: {
+        messages: ['Good Morning.', 'Wonderful day today!', 'Fine morning to you.'],
+        chores: ['brush your teeth :D', 'feed the dogs', 'feed the cats'],
+    },
+    afternoon: {
+        messages: ['Good afternoon.', 'Midday to you.', 'How was your morning?'],
+        chores: ['make lunch for family', 'fetch brother from school', 'read 15 pages of your book']
+    },
+    evening: {
+        messages: ['Good Evening.', 'Good Night!', 'How was your day?'], 
+        chores: ['feed the animals', 'turn on the outside lights', 'lock all the doors']
+    },
+    morningmessage(morningPhrase) {
+        this.morning.messages.push(morningPhrase)
     },
     afternoonMessage(afternoonPhrase) {
-        this.afternoonMessages.push(afternoonPhrase)
+        this.afternoon.messages.push(afternoonPhrase)
     },
     eveningMessage(eveningPhrase) {
-        this.eveningMessages.push(eveningPhrase)
+        this.evening.messages.push(eveningPhrase)
+    },
+    morningChore(chore) {
+        this.morning.chores.push(chore)
+    },
+    afternoonChore(chore) {
+        this.afternoon.chores.push(chore)
+    },
+    eveningChore(chore) {
+        this.evening.chores.push(chore)
     }
 }
 
 const mixedMessage = () => {
-    const randomIndexMorning = Math.floor(Math.random() * messages.morningMessages.length)
-    const randomIndexAfternoon = Math.floor(Math.random() * messages.afternoonMessages.length)
-    const randomIndexEvening = Math.floor(Math.random() * messages.eveningMessages.length)
-    if (typeof randomTimeOfDay != 'string') {
-        return 'time of day must be either: morning, afternoon, evening.'
-    }
-    if (randomTimeOfDay === 'morning') {
-        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.morningMessages[randomIndexMorning])
-    } else if ( randomTimeOfDay === 'afternoon') {
-        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.afternoonMessages[randomIndexAfternoon])
-    } else if ( randomTimeOfDay === 'evening') {
-        console.log('It is currently ' + randomTimeOfDay + '. ' + messages.eveningMessages[randomIndexEvening])
+    if (time < 12) {
+        console.log(reminders.morning.messages[Math.floor(Math.random() * reminders.morning.messages.length)] + ' Dont forget to ' + reminders.morning.chores[Math.floor(Math.random() * reminders.morning.chores.length)] + '.')
+    } else if ( time < 18) {
+        console.log(reminders.afternoon.messages[Math.floor(Math.random() * reminders.afternoon.messages.length)] + ' Dont forget to ' + reminders.afternoon.chores[Math.floor(Math.random() * reminders.afternoon.chores.length)] + '.')
+    } else if ( time < 24) {
+        console.log(reminders.evening.messages[Math.floor(Math.random() * reminders.evening.messages.length)] + ' Dont forget to ' + reminders.evening.chores[Math.floor(Math.random() * reminders.evening.chores.length)] + '.')
     } else {
         return 'Check your spelling, make sure you are using either: morning, afternoon or evening.'
     }
 }
-messages.eveningMessage('I am off to bed.')
+console.log(time + '')
+reminders.eveningMessage('Time to wind down.')
 console.log(mixedMessage())
